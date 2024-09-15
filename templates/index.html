@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        .calculator {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .calculator input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            text-align: right;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .buttons button {
+            padding: 20px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+        .buttons button:hover {
+            background-color: #ddd;
+        }
+        .buttons button.operation {
+            background-color: #f9a825;
+            color: white;
+        }
+        .buttons button.operation:hover {
+            background-color: #f57f17;
+        }
+        .buttons button.equal {
+            background-color: #4caf50;
+            color: white;
+            grid-column: span 4;
+        }
+        .buttons button.equal:hover {
+            background-color: #388e3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <form action="/calculate" method="POST">
+            <input type="text" name="expression" id="expression" value="{{ expression if expression else '' }}" readonly>
+            <div class="buttons">
+                <button type="button" onclick="appendToExpression('7')">7</button>
+                <button type="button" onclick="appendToExpression('8')">8</button>
+                <button type="button" onclick="appendToExpression('9')">9</button>
+                <button type="button" class="operation" onclick="appendToExpression('+')">+</button>
+
+                <button type="button" onclick="appendToExpression('4')">4</button>
+                <button type="button" onclick="appendToExpression('5')">5</button>
+                <button type="button" onclick="appendToExpression('6')">6</button>
+                <button type="button" class="operation" onclick="appendToExpression('-')">-</button>
+
+                <button type="button" onclick="appendToExpression('1')">1</button>
+                <button type="button" onclick="appendToExpression('2')">2</button>
+                <button type="button" onclick="appendToExpression('3')">3</button>
+                <button type="button" class="operation" onclick="appendToExpression('*')">*</button>
+
+                <button type="button" onclick="appendToExpression('0')">0</button>
+                <button type="button" onclick="appendToExpression('.')">.</button>
+                <button type="button" onclick="clearExpression()">C</button>
+                <button type="button" class="operation" onclick="appendToExpression('/')">/</button>
+
+                <button type="submit" class="equal">=</button>
+            </div>
+        </form>
+
+        {% if result is not none %}
+        <h2>Resultado: {{ result }}</h2>
+        {% endif %}
+    </div>
+
+    <script>
+        function appendToExpression(value) {
+            document.getElementById('expression').value += value;
+        }
+
+        function clearExpression() {
+            document.getElementById('expression').value = '';
+        }
+    </script>
+</body>
+</html>
