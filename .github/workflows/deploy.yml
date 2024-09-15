@@ -11,21 +11,21 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v3
-      with:
-        python-version: '3.10'
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+    # Adicione aqui quaisquer comandos necessários para construir seu projeto, se houver
+    # Por exemplo, se você estiver usando um framework de front-end, você pode adicionar:
+    # - name: Build project
+    #   run: |
+    #     npm install
+    #     npm run build
 
     - name: Deploy to Vercel
-      env:
-        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-      run: |
-        npm install -g vercel
-        vercel deploy --prod --token $VERCEL_TOKEN
+      uses: amondnet/vercel-action@v25
+      with:
+        vercel-token: ${{ secrets.VERCEL_TOKEN }}  # Required
+        github-token: ${{ secrets.GITHUB_TOKEN }}  # Optional, para interagir com a API do GitHub
+        vercel-args: '--prod'  # Optional, deploy para produção
+        vercel-org-id: ${{ secrets.ORG_ID }}  # Required, ID da sua organização no Vercel
+        vercel-project-id: ${{ secrets.PROJECT_ID }}  # Required, ID do seu projeto no Vercel
+        working-directory: ./sub-directory  # Ajuste se o código estiver em um subdiretório
