@@ -13,12 +13,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Install Vercel CLI
+      run: npm install -g vercel
+
     - name: Deploy to Vercel
-      uses: amondnet/vercel-action@v25
-      with:
-        vercel-token: ${{ secrets.VERCEL_TOKEN }}  # Required
-        github-token: ${{ secrets.GITHUB_TOKEN }}  # Optional, para interagir com a API do GitHub
-        vercel-args: '--prod --confirm'  # Optional, deploy para produção e confirma automaticamente
-        vercel-org-id: ${{ secrets.ORG_ID }}  # Required, ID da sua organização no Vercel
-        vercel-project-id: ${{ secrets.PROJECT_ID }}  # Required, ID do seu projeto no Vercel
-        working-directory: ./sub-directory  # Ajuste se o código estiver em um subdiretório
+      run: vercel --prod --confirm
+      env:
+        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
