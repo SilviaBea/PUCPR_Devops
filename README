@@ -1,1 +1,25 @@
-LEIA
+# Calculadora Web em Python com Flask
+
+Este é um projeto simples de calculadora web desenvolvida em Python usando o framework Flask. A aplicação permite realizar operações matemáticas básicas, como adição, subtração, multiplicação e divisão. O projeto também inclui uma configuração básica de CI usando GitHub Actions para linting e testes.
+
+## Funcionalidades
+
+- Adição, subtração, multiplicação e divisão.
+- Interface web simples com HTML e CSS.
+- Testes básicos para garantir que a aplicação funciona corretamente.
+- Verificação de código e execução de testes automatizados usando GitHub Actions.
+
+## Requisitos
+
+Para executar esta aplicação, você precisa de:
+
+- Python 3.10 ou superior
+- pip (gerenciador de pacotes Python)
+
+## Configuração
+
+1. **Clone o repositório:**
+
+   ```bash
+   git clone https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git
+   cd NOME_DO_REPOSITORIO
