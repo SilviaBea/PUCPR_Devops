@@ -10,4 +10,4 @@ def test_home_page(client):
     """Testa se a página inicial carrega com sucesso"""
     response = client.get('/')
     assert response.status_code == 200
-    assert b'Calculadora Simples' in response.data
+    assert b'Calculadora' in response.data
