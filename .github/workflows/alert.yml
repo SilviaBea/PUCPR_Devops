@@ -1,18 +1,14 @@
-name: Notify Discord on Commit or Merge
+name: Discord Webhook
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    types: [closed]
+on: [push]
 
 jobs:
-  notify:
+  git:
     runs-on: ubuntu-latest
     steps:
-      - name: Send Discord Notification
-        uses: Ilshidur/action-discord@v1.0.0
+      - uses: actions/checkout@v2
+
+      - name: Run Discord Webhook
+        uses: johnnyhuy/actions-discord-git-webhook@main
         with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          message: "New commit or merge on the main branch!"
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
